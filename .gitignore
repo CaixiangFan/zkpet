@@ -17,6 +17,7 @@ data
 *.params
 *.bytecode
 *.bin
+*.srs
 *~
 \#*\#
 .DS_Store
