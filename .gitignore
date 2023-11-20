@@ -18,6 +18,11 @@ data
 *.bytecode
 *.bin
 *.srs
+*.abi
+*.json
+*.onnx
+*.ezkl
+*.txt
 *~
 \#*\#
 .DS_Store
