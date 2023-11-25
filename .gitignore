@@ -22,7 +22,6 @@ data
 *.json
 *.onnx
 *.ezkl
-*.txt
 *~
 \#*\#
 .DS_Store
@@ -50,3 +49,5 @@ var/
 *.whl
 *.bak
 venv
+test_results
+results
