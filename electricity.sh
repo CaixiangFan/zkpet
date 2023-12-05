@@ -8,11 +8,11 @@ if [ ! -d "./logs/LongForecasting" ]; then
 fi
 
 pred_len=24
-model_name=Linear
+model_name=NLinear
 
-target='80'
+target='40'
 
-seq_len=48
+seq_len=96
 python -u run_longExp.py \
   --is_training 1 \
   --root_path ./dataset/ \
