@@ -60,7 +60,7 @@ def main() -> None:
     # Load model and data
 
     args = Linear_LTSF.Args(
-        model='Linear', target='1', batch_size=16, seq_len=96, pred_len=24
+        model='DLinear', target='1', batch_size=16, seq_len=96, pred_len=24
         )
     model_dict = {
         'DLinear': DLinear,
