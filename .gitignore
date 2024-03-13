@@ -51,3 +51,4 @@ var/
 venv
 test_results
 results
+src/contractAddr.txt
