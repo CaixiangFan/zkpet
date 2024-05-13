@@ -1,0 +1,71 @@
+{
+  "run_args": {
+    "tolerance": {
+      "val": 0.0,
+      "scale": 1.0
+    },
+    "input_scale": 13,
+    "param_scale": 13,
+    "scale_rebase_multiplier": 10,
+    "lookup_range": [
+      0,
+      4
+    ],
+    "logrows": 21,
+    "num_inner_cols": 2,
+    "variables": [
+      [
+        "batch_size",
+        1
+      ]
+    ],
+    "input_visibility": "Private",
+    "output_visibility": "Public",
+    "param_visibility": "Fixed",
+    "div_rebasing": false,
+    "rebase_frac_zero_constants": false,
+    "check_mode": "UNSAFE",
+    "commitment": "KZG"
+  },
+  "num_rows": 392837,
+  "total_assignments": 785675,
+  "total_const_size": 1076492,
+  "total_dynamic_col_size": 180000,
+  "num_dynamic_lookups": 150,
+  "num_shuffles": 100,
+  "total_shuffle_col_size": 118800,
+  "model_instance_shapes": [
+    [
+      1,
+      24,
+      50
+    ]
+  ],
+  "model_output_scales": [
+    26
+  ],
+  "model_input_scales": [
+    13
+  ],
+  "module_sizes": {
+    "polycommit": [],
+    "poseidon": [
+      0,
+      [
+        0
+      ]
+    ]
+  },
+  "required_lookups": [
+    {
+      "GreaterThanEqual": {
+        "a": 0.0
+      }
+    }
+  ],
+  "required_range_checks": [],
+  "check_mode": "UNSAFE",
+  "version": "10.0.2",
+  "num_blinding_factors": null,
+  "timestamp": 1712436742276
+}
