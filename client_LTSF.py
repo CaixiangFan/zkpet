@@ -6,6 +6,7 @@ import numpy as np
 import torch
 from models import DLinear, Linear, NLinear
 import flwr as fl
+import sys
 
 DEVICE: str = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -58,9 +59,10 @@ class LtsfClient(fl.client.NumPyClient):
 def main() -> None:
     """Load data, start LtsfClient."""
     # Load model and data
-
+    # Run client with args: model_type, target, seq_len 
+    sys_args = sys.argv[1:]
     args = Linear_LTSF.Args(
-        model='DLinear', target='0', batch_size=16, seq_len=96, pred_len=24
+        model=sys_args[0], target=sys_args[1], batch_size=16, seq_len=int(sys_args[2]), pred_len=24
         )
     model_dict = {
         'DLinear': DLinear,
