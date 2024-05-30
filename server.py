@@ -8,23 +8,15 @@ import flwr as fl
 import torch
 import numpy as np
 import Linear_LTSF
+import sys
 
 DEVICE: str = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-args = Linear_LTSF.Args(
-    model='Linear', target='0', batch_size=16, seq_len=96, pred_len=24
-    )
-model_dict = {
-    'DLinear': DLinear,
-    'NLinear': NLinear,
-    'Linear': Linear,
-}
-model = model_dict[args.model].Model(args).float()
-net = model.to(DEVICE)
 
 class SaveModelStrategy(fl.server.strategy.FedAvg):
     def aggregate_fit(
         self,
         server_round: int,
+        args: list[str],
         results: List[Tuple[fl.server.client_proxy.ClientProxy, fl.common.FitRes]],
         failures: List[Union[Tuple[ClientProxy, FitRes], BaseException]],
     ) -> Tuple[Optional[List[np.ndarray]], Dict[str, any]]:
@@ -45,11 +37,23 @@ class SaveModelStrategy(fl.server.strategy.FedAvg):
             net.load_state_dict(state_dict, strict=True)
 
             # Save the model
-            torch.save(net.state_dict(), f"model_round_{server_round}.pth")
+            torch.save(net.state_dict(), f"model_{args[0]}_{args[1]}_{args[2]}_round_{server_round}.pth")
 
         return aggregated_parameters, aggregated_metrics
     
 
 if __name__ == "__main__":
+    sys_args = sys.argv[1:]
+    args = Linear_LTSF.Args(
+        model=sys_args[0], target=sys_args[1], batch_size=16, seq_len=int(sys_args[2]), pred_len=24
+        )
+    model_dict = {
+        'DLinear': DLinear,
+        'NLinear': NLinear,
+        'Linear': Linear,
+    }
+    model = model_dict[args.model].Model(args).float()
+    net = model.to(DEVICE)
+    
     strategy = SaveModelStrategy()
-    fl.server.start_server(server_address="0.0.0.0:8080", config=fl.server.ServerConfig(num_rounds=3), strategy=strategy)
+    fl.server.start_server(server_address="0.0.0.0:8080", config=fl.server.ServerConfig(num_rounds=1, args=sys_args), strategy=strategy)
