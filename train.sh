@@ -9,7 +9,7 @@ fi
 
 pred_len=24
 model_name=NLinear
-for t in $(seq 37 39); do
+for t in $(seq 296 319); do
     echo 'Processing '${t}
     target=${t}
 

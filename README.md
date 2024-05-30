@@ -13,7 +13,7 @@ sh train.sh
 2. All trained models are saved in the `checkpoints` folder named by the hyperparameters. Saved files are `checkpoint.onnx` and `checkpoint.pth`. In this step, `checkpoint.onnx` is saved from `checkpoint.pth` with some dummy data. So, it cannot be directly used in ZKML.
 
 ## ZKML Inference Models
-1. Load the `.pth` file and corresponding `electricity.csv` data to convert it to `.onnx` model. Execute the first cell in the `src/electricity_decentralized_ZKML_single.ipynb` file.
+1. Load the `.pth` file and corresponding `electricity.csv` data to convert it to `.onnx` model. Execute the first cell in the `src/electricity_decentralized_ZKML.ipynb` file.
 2. Change back to root, ZKML and profile the inference by running the following script.
 ```
 sh src/electricity_decentralized_ZKML_single.sh
