@@ -8,10 +8,27 @@ We simplify a set of simple linear models for long-term time series forcasting c
 ## Train ML Models
 1. Clone this repository, in the root, edit and execute the `train.sh` script to train the models in the background.
 ```
-sh train.sh 
+bash train.sh 
 ```
 2. All trained models are saved in the `checkpoints` folder named by the hyperparameters. Saved files are `checkpoint.onnx` and `checkpoint.pth`. In this step, `checkpoint.onnx` is saved from `checkpoint.pth` with some dummy data. So, it cannot be directly used in ZKML.
 
+## Train FL Models
+1. Identify sites in a cluster from the `clustering.ipynb` file. For example, `cluster 2` has the following sites:
+```
+[  0,   2,   4,   6,   9,  11,  12,  25,  29,  36,  46,  50,  57,
+  59,  68,  70,  75,  81,  83,  84,  85,  86,  87,  97,  98,  99,
+  103, 104, 105, 106, 107, 111, 113, 114, 115, 116, 117, 118, 119,
+  120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132,
+  133, 146, 182, 245, 270, 298, 299, 303, 310, 317, 318, 319, 320]
+  ```
+2. Use the Flower framework to train the FL model. Launch the server using the following command.
+```
+python server.py
+```
+3. Run multiple clients to train the local models via
+```
+bash train_FL.sh
+```
 ## ZKML Inference Models
 1. Load the `.pth` file and corresponding `electricity.csv` data to convert it to `.onnx` model. Execute the first cell in the `src/electricity_decentralized_ZKML.ipynb` file.
 2. Change back to root, ZKML and profile the inference by running the following script.
